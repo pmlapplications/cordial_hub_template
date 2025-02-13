@@ -174,9 +174,12 @@
       console.log("Document ready!");
 
       const videos = [
-          { id: "wjIqjeds5Ug", title: "Video 1" },
-          { id: "9-yvxw-GdZ8", title: "Video 2" },
-          { id: "7nrxZMjXvRo", title: "Video 3" }
+      { id: "wjIqjeds5Ug", title: "..." },
+          { id: "9-yvxw-GdZ8", title: "..." },
+          { id: "7nrxZMjXvRo", title: "..." },
+          { id: "9-yvxw-GdZ8", title: "..." },
+          { id: "wjIqjeds5Ug", title: "..." },
+          { id: "7nrxZMjXvRo", title: "..." },
       ];
 
       function loadVideoThumbnails() {
@@ -205,9 +208,9 @@
           const initialVideo = videos[0];
           $('#mainVideoFrame').attr('src', `https://www.youtube.com/embed/${initialVideo.id}?autoplay=1`);
 
-          setTimeout(function () {
-              $('#video-title').text('Refresh the page to confirm if the server is ready now');
-          }, 120000);
+          setTimeout(function() {
+            $('#video-title').html('<span style="color: orange; font-weight: bold;">Refresh the page to confirm if the server is ready </span>');
+        }, 120000);
       }
 
       loadVideoThumbnails();
