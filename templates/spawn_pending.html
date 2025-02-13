@@ -10,15 +10,6 @@
   </div>
 
   <hr />
-   <!-- Video Embed Section -->
-  <div class="row text-center" style="margin-bottom: 2em">
-    <h4>Enjoy some content while you wait ... </h4>
-    <div id="video-frame">
-      <!-- Video will be embedded here -->
-      <iframe id="videoFrame" width="780" height="415" src="https://www.youtube.com/embed/9-yvxw-GdZ8?autoplay=1" frameborder="0" allowfullscreen></iframe>
-    </div>
-  </div>
-
 
 
   <div class="row">
@@ -110,15 +101,6 @@
 
     // signal that page has finished loading (mostly for tests)
     window._jupyterhub_page_loaded = true;
-
-   
-     // Randomly select and embed a video
-     var videos = [
-     "https://www.youtube.com/embed/wjIqjeds5Ug?autoplay=1",
-     "https://www.youtube.com/embed/9-yvxw-GdZ8?autoplay=1",
-     "https://www.youtube.com/embed/7nrxZMjXvRo?autoplay=1"
-   ];
-   //document.getElementById("videoFrame").src = videos[Math.floor(Math.random() * videos.length)];
   });
 
 
