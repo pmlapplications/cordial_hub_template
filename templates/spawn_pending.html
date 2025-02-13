@@ -13,10 +13,17 @@
 
      <!-- Video Embed Section -->
      <div class="row text-center" style="margin-bottom: 2em">
-      <h4>Enjoy some content while you wait ... </h4>
-      <div id="video-frame">
-        <!-- Video will be embedded here -->
-        <iframe id="videoFrame" width="780" height="415" src="https://www.youtube.com/embed/9-yvxw-GdZ8?autoplay=1" frameborder="0" allowfullscreen></iframe>
+      <h4 id="video-title">Enjoy some content while you wait ... </h4>
+  
+      <div class="container">
+        <div class="video-container">
+          <div class="main-video">
+              <iframe id="mainVideoFrame" width="100%" height="415" src="https://www.youtube.com/embed/9-yvxw-GdZ8?autoplay=1"  frameborder="0" allowfullscreen></iframe>
+          </div>
+          <div class="video-selector" id="videoSelector">
+              <!-- Video thumbnails will be inserted here -->
+          </div>
+        </div>
       </div>
     </div>
 
@@ -54,6 +61,7 @@
 </div>
 
 {% endblock %} {% block script %} {{ super() }}
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
   require(["jquery"], function ($) {
     $("#refresh").click(function () {
@@ -110,6 +118,47 @@
 
     // signal that page has finished loading (mostly for tests)
     window._jupyterhub_page_loaded = true;
+
+
+    $(document).ready(function() {
+      const videos = [
+          { id: "wjIqjeds5Ug", title: "Video 1" },
+          { id: "9-yvxw-GdZ8", title: "Video 2" },
+          { id: "7nrxZMjXvRo", title: "Video 3" },
+    
+      ];
+
+      function loadVideoThumbnails() {
+          const videoSelector = $('#videoSelector');
+          videos.forEach((video, index) => {
+              const thumbnail = $('<div>')
+                  .addClass('video-thumbnail')
+                  .append($('<img>').attr('src', `https://img.youtube.com/vi/${video.id}/0.jpg`))
+                  .append($('<p>').text(video.title));
+              
+              thumbnail.click(function() {
+                  $('#mainVideoFrame').attr('src', `https://www.youtube.com/embed/${video.id}?autoplay=1`);
+              });
+
+              videoSelector.append(thumbnail);
+          });
+      }
+
+      function setInitialVideo() {
+          const initialVideo = videos[0];
+          $('#mainVideoFrame').attr('src', `https://www.youtube.com/embed/${initialVideo.id}?autoplay=1`);
+
+          // Change the video title after 10 seconds
+          setTimeout(function() {
+            $('#video-title').text('Refresh the page to confirm if server is ready now');
+        }, 120000);
+      }
+
+      loadVideoThumbnails();
+      setInitialVideo();
+
+     
+  });
   });
 
 

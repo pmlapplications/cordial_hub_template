@@ -11,7 +11,7 @@
             padding: 20px;
         }
         .container {
-            max-width: 600px;
+            max-width: 1000px;
             margin: auto;
         }
         .feedback-container {
@@ -19,6 +19,41 @@
         }
         .hidden {
             display: none;
+        }
+        .video-container {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        .main-video {
+            width: 75%;
+        }
+        .video-selector {
+            width: 23%;
+            height: 415px;
+            overflow-y: auto;
+            scrollbar-width: thin;
+            scrollbar-color: orange #f1f1f1;
+        }
+        .video-thumbnail {
+            cursor: pointer;
+            margin-bottom: 10px;
+        }
+        .video-thumbnail img {
+            width: 100%;
+            height: auto;
+        }
+        .video-selector::-webkit-scrollbar {
+            width: 10px;
+        }
+        .video-selector::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        .video-selector::-webkit-scrollbar-thumb {
+            background: orange;
+        }
+        .video-selector::-webkit-scrollbar-thumb:hover {
+            background: #ff8c00;
         }
     </style>
 </head>
@@ -39,33 +74,67 @@
                 </div>
             </div>
         </form>
-        
 
-      
-
-
-        <!-- Video IFrame for testing -->
-        <h2>Test Video</h2>
-        <iframe id="videoFrame" width="760" height="415" frameborder="0" allowfullscreen></iframe>
+        <h4 id="video-title">Enjoy some content while you wait ... </h4>
+        <div class="video-container">
+            <div class="main-video">
+                <iframe id="mainVideoFrame" width="100%" height="415" src="" frameborder="0" allowfullscreen></iframe>
+            </div>
+            <div class="video-selector" id="videoSelector">
+                <!-- Video thumbnails will be inserted here -->
+            </div>
+        </div>
     </div>
     
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-        document.getElementById("spawn_form").addEventListener("submit", function(event) {
-            event.preventDefault(); // Prevent actual form submission
-            let submitBtn = document.getElementById("submitBtn");
-            let feedbackWidget = document.querySelector(".feedback-widget");
-            submitBtn.disabled = true;
-            feedbackWidget.classList.remove("hidden");
+        $(document).ready(function() {
+            const videos = [
+                { id: "wjIqjeds5Ug", title: "Video 1" },
+                { id: "9-yvxw-GdZ8", title: "Video 2" },
+                { id: "7nrxZMjXvRo", title: "Video 3" },
+          
+            ];
+
+            function loadVideoThumbnails() {
+                const videoSelector = $('#videoSelector');
+                videos.forEach((video, index) => {
+                    const thumbnail = $('<div>')
+                        .addClass('video-thumbnail')
+                        .append($('<img>').attr('src', `https://img.youtube.com/vi/${video.id}/0.jpg`))
+                        .append($('<p>').text(video.title));
+                    
+                    thumbnail.click(function() {
+                        $('#mainVideoFrame').attr('src', `https://www.youtube.com/embed/${video.id}?autoplay=1`);
+                    });
+
+                    videoSelector.append(thumbnail);
+                });
+            }
+
+            function setInitialVideo() {
+                const initialVideo = videos[0];
+                $('#mainVideoFrame').attr('src', `https://www.youtube.com/embed/${initialVideo.id}?autoplay=1`);
+
+                 // Change the video title after 10 seconds
+                 setTimeout(function() {
+                    $('#video-title').text('Refresh the page to confirm if server is ready now');
+                }, 3000);
+            }
+
+            loadVideoThumbnails();
+            setInitialVideo();
+
+            $("#spawn_form").submit(function(event) {
+                event.preventDefault();
+                let submitBtn = $("#submitBtn");
+                let feedbackWidget = $(".feedback-widget");
+                submitBtn.prop('disabled', true);
+                feedbackWidget.removeClass("hidden");
+
+               
+            });
         });
-        
-        // Randomly select a video link from the list and autoplay it
-        const videoLinks = [
-            "https://www.youtube.com/embed/wjIqjeds5Ug?autoplay=1",
-            "https://www.youtube.com/embed/9-yvxw-GdZ8?autoplay=1",
-            "https://www.youtube.com/embed/7nrxZMjXvRo?autoplay=1"
-        ];
-        
-        document.getElementById("videoFrame").src = videoLinks[Math.floor(Math.random() * videoLinks.length)];
     </script>
 </body>
 </html>
