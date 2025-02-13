@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Select a Server</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+        }
+        .feedback-container {
+            margin-top: 20px;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1><b>Select a Server</b></h1>
+        <form id="spawn_form" action="#" method="post">
+            <label for="server">Choose a server:</label>
+            <select id="server" name="server">
+                <option value="server1">Server 1</option>
+                <option value="server2">Server 2</option>
+            </select>
+            <br><br>
+            <div class="feedback-container">
+                <input type="submit" value="Start" id="submitBtn">
+                <div class="feedback-widget hidden">
+                    <span>Loading...</span>
+                </div>
+            </div>
+        </form>
+        
+
+      
+
+
+        <!-- Video IFrame for testing -->
+        <h2>Test Video</h2>
+        <iframe id="videoFrame" width="760" height="415" frameborder="0" allowfullscreen></iframe>
+    </div>
+    
+    <script>
+        document.getElementById("spawn_form").addEventListener("submit", function(event) {
+            event.preventDefault(); // Prevent actual form submission
+            let submitBtn = document.getElementById("submitBtn");
+            let feedbackWidget = document.querySelector(".feedback-widget");
+            submitBtn.disabled = true;
+            feedbackWidget.classList.remove("hidden");
+        });
+        
+        // Randomly select a video link from the list and autoplay it
+        const videoLinks = [
+            "https://www.youtube.com/embed/wjIqjeds5Ug?autoplay=1",
+            "https://www.youtube.com/embed/9-yvxw-GdZ8?autoplay=1",
+            "https://www.youtube.com/embed/7nrxZMjXvRo?autoplay=1"
+        ];
+        
+        document.getElementById("videoFrame").src = videoLinks[Math.floor(Math.random() * videoLinks.length)];
+    </script>
+</body>
+</html>

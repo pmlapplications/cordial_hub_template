@@ -12,9 +12,10 @@
   <hr />
    <!-- Video Embed Section -->
   <div class="row text-center" style="margin-bottom: 2em">
-    <h3>Enjoy some content While You Wait </h3>
+    <h4>Enjoy some content while you wait ... </h4>
     <div id="video-frame">
       <!-- Video will be embedded here -->
+      <iframe id="videoFrame" width="760" height="415" frameborder="0" allowfullscreen></iframe>
     </div>
   </div>
 
@@ -110,15 +111,16 @@
     // signal that page has finished loading (mostly for tests)
     window._jupyterhub_page_loaded = true;
 
-    // Randomly select and embed a video
-    var videos = [
-      "https://www.youtube.com/embed/wjIqjeds5Ug?autoplay=1",
-      "https://www.youtube.com/embed/9-yvxw-GdZ8?autoplay=1",
-      "https://www.youtube.com/embed/7nrxZMjXvRo?autoplay=1"
-    ];
-    var randomVideo = videos[Math.floor(Math.random() * videos.length)];
-    $("#video-frame").html('<iframe width="560" height="315" src="' + randomVideo + '" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>');
-
+   
+     // Randomly select and embed a video
+     var videos = [
+     "https://www.youtube.com/embed/wjIqjeds5Ug?autoplay=1",
+     "https://www.youtube.com/embed/9-yvxw-GdZ8?autoplay=1",
+     "https://www.youtube.com/embed/7nrxZMjXvRo?autoplay=1"
+   ];
+   document.getElementById("videoFrame").src = videos[Math.floor(Math.random() * videos.length)];
   });
+
+
 </script>
 {% endblock %}
