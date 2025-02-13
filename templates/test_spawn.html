@@ -87,54 +87,77 @@
     </div>
     
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
-        $(document).ready(function() {
-            const videos = [
-                { id: "wjIqjeds5Ug", title: "Video 1" },
-                { id: "9-yvxw-GdZ8", title: "Video 2" },
-                { id: "7nrxZMjXvRo", title: "Video 3" },
-          
+    
+    <script type="text/javascript">
+        $(document).ready(function () {
+            console.log("Document ready!");
+    
+            const defaultvideos = [
+                { id: "wjIqjeds5Ug", title: "dv 1" },
+                { id: "9-yvxw-GdZ8", title: "..." },
+                { id: "7nrxZMjXvRo", title: "..." },
+                { id: "9-yvxw-GdZ8", title: "..." },
+                { id: "wjIqjeds5Ug", title: "..." },
+                { id: "7nrxZMjXvRo", title: "..." },
             ];
-
-            function loadVideoThumbnails() {
+    
+            const jsonUrl = "https://lwmainstorageprod.blob.core.windows.net/staticfiles/videolist.json";
+    
+            function loadVideos(videos) {
+                console.log("Loading videos...");
                 const videoSelector = $('#videoSelector');
-                videos.forEach((video, index) => {
+                videoSelector.empty(); // Clear existing thumbnails
+    
+                videos.forEach(video => {
                     const thumbnail = $('<div>')
                         .addClass('video-thumbnail')
-                        .append($('<img>').attr('src', `https://img.youtube.com/vi/${video.id}/0.jpg`))
+                        .append($('<img>').attr('src', `https://img.youtube.com/vi/${video.id}/0.jpg`).css({ width: '120px', cursor: 'pointer' }))
                         .append($('<p>').text(video.title));
-                    
-                    thumbnail.click(function() {
+    
+                    thumbnail.click(function () {
                         $('#mainVideoFrame').attr('src', `https://www.youtube.com/embed/${video.id}?autoplay=1`);
                     });
-
+    
                     videoSelector.append(thumbnail);
                 });
+    
+                console.log("Video thumbnails loaded.");
             }
-
-            function setInitialVideo() {
+    
+            function setInitialVideo(videos) {
+                console.log("Setting initial video...");
                 const initialVideo = videos[0];
                 $('#mainVideoFrame').attr('src', `https://www.youtube.com/embed/${initialVideo.id}?autoplay=1`);
-
-                 // Change the video title after 10 seconds
-                 setTimeout(function() {
-                    $('#video-title').text('Refresh the page to confirm if server is ready now');
-                }, 3000);
+    
+                setTimeout(function() {
+                    $('#video-title').html('<span style="color: orange; font-weight: bold;">Refresh the page to confirm if the server is ready </span>');
+                }, 120000);
             }
-
-            loadVideoThumbnails();
-            setInitialVideo();
-
-            $("#spawn_form").submit(function(event) {
-                event.preventDefault();
-                let submitBtn = $("#submitBtn");
-                let feedbackWidget = $(".feedback-widget");
-                submitBtn.prop('disabled', true);
-                feedbackWidget.removeClass("hidden");
-
-               
-            });
+    
+            function fetchVideos() {
+                fetch(jsonUrl)
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error(`HTTP error! Status: ${response.status}`);
+                        }
+                        return response.json();
+                    })
+                    .then(videos => {
+                        console.log("Fetched videos successfully:", videos);
+                        loadVideos(videos);
+                        setInitialVideo(videos);
+                    })
+                    .catch(error => {
+                        console.error("Fetch failed, using default videos:", error);
+                        loadVideos(defaultvideos);
+                        setInitialVideo(defaultvideos);
+                    });
+            }
+    
+            // Start by fetching videos
+            fetchVideos();
         });
     </script>
+    
 </body>
 </html>
