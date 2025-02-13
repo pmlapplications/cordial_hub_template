@@ -149,7 +149,7 @@
                   .append($('<p>').text(video.title));
 
               thumbnail.click(function () {
-                  console.log(`Switching to video: ${video.id}`);
+                  // console.log(`Switching to video: ${video.id}`);
                   $('#mainVideoFrame').attr('src', `https://www.youtube.com/embed/${video.id}?autoplay=1`);
               });
 
