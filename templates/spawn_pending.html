@@ -122,9 +122,12 @@
 
     $(document).ready(function() {
       const videos = [
-          { id: "wjIqjeds5Ug", title: "Video 1" },
-          { id: "9-yvxw-GdZ8", title: "Video 2" },
-          { id: "7nrxZMjXvRo", title: "Video 3" },
+          { id: "wjIqjeds5Ug", title: "..." },
+          { id: "9-yvxw-GdZ8", title: "..." },
+          { id: "7nrxZMjXvRo", title: "..." },
+          { id: "9-yvxw-GdZ8", title: "..." },
+          { id: "wjIqjeds5Ug", title: "..." },
+          { id: "7nrxZMjXvRo", title: "..." },
     
       ];
 
@@ -151,9 +154,10 @@
           $('#mainVideoFrame').attr('src', `https://www.youtube.com/embed/${initialVideo.id}?autoplay=1`);
 
           // Change the video title after 10 seconds
-          setTimeout(function() {
-            $('#video-title').text('Refresh the page to confirm if server is ready now');
+         setTimeout(function() {
+            $('#video-title').html('<span style="color: orange; font-weight: bold;">Refresh the page to confirm if the server is ready </span>');
         }, 120000);
+
       }
 
       loadVideoThumbnails();
