@@ -191,7 +191,8 @@ title.replace(' ', '-').lower() %} {% set btn_label = btn_label or title %}
       background-size: cover;
       background-position: center;
       position: relative;
-      background-image: url("https://cordonpersistent.blob.core.windows.net/static-public-files/satellite-ocean4.jpg");
+      /*background-image: url("https://cordonpersistent.blob.core.windows.net/static-public-files/satellite-ocean4.jpg"); */
+      background-image: url("/custom/static/images/satellite-ocean4.jpg");
       margin-bottom: 2em;
     }
 
@@ -241,14 +242,18 @@ title.replace(' ', '-').lower() %} {% set btn_label = btn_label or title %}
 
     @font-face {
       font-family: 'Gilroy';
-      src: url("https://lwmainstorageprod.blob.core.windows.net/staticfiles/gilroy_font/Gilroy-Regular.ttf") format('truetype');
+      /* src: url("https://lwmainstorageprod.blob.core.windows.net/staticfiles/gilroy_font/Gilroy-Regular.ttf") format('truetype'); */
+      src: url("/custom/static/fonts/gilroy/Gilroy-Regular.ttf") format('truetype');
+
       font-weight: normal;
       font-style: normal;
     }
 
     @font-face {
       font-family: 'Gilroy';
-      src: url("https://lwmainstorageprod.blob.core.windows.net/staticfiles/gilroy_font/Gilroy-Bold.ttf") format('truetype');
+      /* src: url("https://lwmainstorageprod.blob.core.windows.net/staticfiles/gilroy_font/Gilroy-Bold.ttf") format('truetype'); */
+      src: url("/custom/static/fonts/gilroy/Gilroy-Bold.ttf") format('truetype');
+
       font-weight: bold;
       font-style: normal;
     }
@@ -257,21 +262,25 @@ title.replace(' ', '-').lower() %} {% set btn_label = btn_label or title %}
 
     @font-face {
       font-family: 'Gilroy';
-      src: url("https://lwmainstorageprod.blob.core.windows.net/staticfiles/gilroy_font/Gilroy-Medium.ttf") format('truetype');
+      /* src: url("https://lwmainstorageprod.blob.core.windows.net/staticfiles/gilroy_font/Gilroy-Medium.ttf") format('truetype'); */
+      src: url("/custom/static/fonts/gilroy/Gilroy-Medium.ttf") format('truetype');
       font-weight: normal;
       font-style: italic;
     }
 
     @font-face {
       font-family: 'Neo_Sans';
-      src: url("https://cordonpersistent.blob.core.windows.net/static-public-files/fonts/Neo_Sans_Regular/Neo_Sans_Regular.ttf") format('truetype');
+      /* src: url("https://cordonpersistent.blob.core.windows.net/static-public-files/fonts/Neo_Sans_Regular/Neo_Sans_Regular.ttf") format('truetype'); */
+       src: url("/custom/static/fonts/neo_sans/Neo_Sans_Regular.ttf") format('truetype');
       font-weight: normal;
       font-style: normal;
     }
 
     @font-face {
       font-family: 'Neo_Sans';
-      src: url("https://cordonpersistent.blob.core.windows.net/static-public-files/fonts/Neo_Sans_Bold/Neo_Sans_Bold.ttf") format('truetype');
+      /* src: url("https://cordonpersistent.blob.core.windows.net/static-public-files/fonts/Neo_Sans_Bold/Neo_Sans_Bold.ttf") format('truetype'); */
+      src: url("/custom/static/fonts/neo_sans/Neo_Sans_Bold.ttf") format('truetype');
+
       font-weight: bold;
       font-style: normal;
     }
@@ -399,7 +408,7 @@ https://github.com/pallets/markupsafe/blob/2.1.4/src/markupsafe/_native.py#L6
         {% block logo %}
         <span id="jupyterhub-logo" class="pull-left">
           <a href="{{logo_url or base_url}}"><img id="jupyterhub-logo-img"
-              src="https://cordonpersistent.blob.core.windows.net/static-public-files/CORDIAL_logo_colour.png"
+             src="/custom/static/images/CORDIAL_logo_colour.png"
               alt="JupyterHub logo" class="jpy-logo" title="Home"
               style="object-fit: contain; width: 150px; height: 35px; margin-bottom: 0.5em;" /></a>
         </span>
